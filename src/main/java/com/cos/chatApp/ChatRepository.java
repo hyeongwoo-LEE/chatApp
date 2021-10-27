@@ -11,4 +11,9 @@ public interface ChatRepository extends ReactiveMongoRepository<Chat,String> {
     @Tailable // 커서를 안닫고 계속 유지한다.
     @Query("{sender:?0, receiver:?1}")
     Flux<Chat> mFindBySender(String sender, String receiver);
+
+    //Flux (흐름) - 한번만 받는게 아니라 계속 받겠다. - response 를 유지하면서 계속 흘려보내기
+    @Tailable // 커서를 안닫고 계속 유지한다.
+    @Query("{roomNum:?0}")
+    Flux<Chat> mFindByRoomNum(Integer roomNum);
 }
